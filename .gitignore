@@ -1,0 +1,157 @@
+# ========================
+# Python & Data Science
+# ========================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.dmypy.json
+.pyre/
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.env
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+*.ipynb
+*.ipynb.gz
+
+# Data & Models (DO NOT COMMIT LARGE FILES)
+/data/raw/
+/data/processed/
+/models/
+!models/__init__.py  # Optional: keep if you want to track the folder structure
+*.pkl
+*.h5
+*.joblib
+*.pt
+*.pth
+
+# Output & Reports (Generated, not source)
+/reports/*.pdf
+/assets/figures/
+
+# ========================
+# FastAPI / Backend
+# ========================
+/backend/__pycache__/
+/backend/*.pyc
+/backend/uwsgi.ini
+/backend/gunicorn.conf.py
+
+# Environment variables
+*.env
+*.env.local
+.env.backup
+
+# ========================
+# React / Frontend
+# ========================
+/frontend/node_modules/
+/frontend/build/
+/frontend/.env.local
+/frontend/.env
+/frontend/.DS_Store
+/frontend/npm-debug.log*
+/frontend/yarn-debug.log*
+/frontend/yarn-error.log*
+/frontend/.vercel
+
+# ========================
+# IDE & Editors
+# ========================
+# VS Code
+.vscode/
+*.swp
+*.swo
+*~
+
+# PyCharm
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list/
+tramp
+.\#*
+
+# Vim
+.*.sw[a-z]
+.sw[a-z]
+session.vim
+.netrwhist
+*~
+
+# ========================
+# OS & Misc
+# ========================
+# Mac
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.AppleDouble
+.LSOverride
+.Icon
+**/.DocumentRevisions-V100
+**/.fseventsd
+**/.Spotlight-V100
+**/.Trashes
+.AppleDB
+.AppleDesktop
+AutoRun.inf
+Desktop.ini
+
+# Windows
+$RECYCLE.BIN/
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+
+# ========================
+# Logs & Databases
+# ========================
+*.log
+logs/
+*.sqlite3
+*.sql
+*.db
+
+# ========================
+# Build & Distribution
+# ========================
+dist/
+build/
+*.egg-info/
+*.egg
+*.whl
+
+# ========================
+# Optional: Allow specific files
+# ========================
+# Uncomment if you want to version control empty directories
+# !data/raw/.gitkeep
+# !models/.gitkeep
+# !assets/figures/.gitkeep
