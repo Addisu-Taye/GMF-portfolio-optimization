@@ -30,28 +30,70 @@ Output:
 
 import yfinance as yf
 import pandas as pd
-import joblib
+import time
+import os
 
-def fetch_data():
+def fetch_data_with_retry(symbols, start, end, max_retries=5, delay=2):
     """
-    Fetches historical financial data for TSLA, BND, and SPY from Yahoo Finance.
-
-    Returns:
-        pd.DataFrame: DataFrame containing adjusted closing prices indexed by date.
+    Fetch data with retry logic and per-symbol error handling.
     """
-    symbols = ["TSLA", "BND", "SPY"]
-    data = yf.download(
-        symbols,
-        start="2015-07-01",
-        end="2025-07-31",
-        progress=False
-    )
-    prices = data["Adj Close"].copy()
-    volumes = data["Volume"]
+    all_data = {}
+    
+    for symbol in symbols:
+        for attempt in range(max_retries):
+            try:
+                print(f"Fetching data for {symbol} (Attempt {attempt + 1}/{max_retries})...")
+                ticker = yf.Ticker(symbol)
+                data = ticker.history(start=start, end=end, interval="1d")
+                
+                if data.empty:
+                    print(f"No data returned for {symbol}.")
+                    continue
+                
+                # Add symbol as prefix to columns
+                data.columns = [f"{symbol}_{col}" for col in data.columns]
+                all_data[symbol] = data
+                print(f"✅ Successfully fetched data for {symbol}")
+                break  # Exit loop if successful
+                
+            except Exception as e:
+                print(f"❌ Failed to fetch {symbol}: {e}")
+                if attempt < max_retries - 1:
+                    print(f"Retrying in {delay} seconds...")
+                    time.sleep(delay)
+                else:
+                    print(f"❌ Failed after {max_retries} attempts for {symbol}")
+    
+    if not all_data:
+        raise Exception("Failed to download data for all symbols.")
+    
+    # Combine data on Date
+    combined = pd.concat(all_data.values(), axis=1)
+    prices = combined[[f"{s}_Close" for s in symbols]].copy()
+    volumes = combined[[f"{s}_Volume" for s in symbols]].copy()
+    
+    # Clean column names
+    prices.columns = symbols
+    volumes.columns = symbols
+    
+    # Ensure directory exists
+    os.makedirs("data/raw", exist_ok=True)
+    
+    # Save
     prices.to_pickle("data/raw/stock_data.pkl")
     volumes.to_pickle("data/raw/volume_data.pkl")
+    
+    print("✅ All data saved to data/raw/")
     return prices
 
 if __name__ == "__main__":
-    df = fetch_data()
-    print("Data saved to data/raw/stock_data.pkl")
+    symbols = ["TSLA", "BND", "SPY"]
+    start = "2015-07-01"
+    end = "2025-07-31"
+    
+    try:
+        df = fetch_data_with_retry(symbols, start, end)
+        print(f"Data shape: {df.shape}")
+        print(f"Date range: {df.index.min()} to {df.index.max()}")
+    except Exception as e:
+        print(f"❌ Critical error: {e}")
