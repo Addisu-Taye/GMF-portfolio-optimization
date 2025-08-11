@@ -196,6 +196,7 @@ print(f"{'ARIMA':<10} {mae_arima:<10.2f} {rmse_arima:<10.2f} {mape_arima:<10.2f}
 print(f"{'LSTM':<10} {mae_lstm:<10.2f} {rmse_lstm:<10.2f} {mape_lstm:<10.2f}")
 print("="*60)
 
+
 if rmse_lstm < rmse_arima:
     print("✅ LSTM outperformed ARIMA based on RMSE.")
     print("💡 Recommendation: Use LSTM for Task 3 forecasting.")
