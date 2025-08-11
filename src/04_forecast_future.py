@@ -65,6 +65,7 @@ except Exception as e:
 # Sequence length (must match training)
 seq_length = 60
 
+
 # ========================
 # 2. Forecast Future Prices
 # ========================
