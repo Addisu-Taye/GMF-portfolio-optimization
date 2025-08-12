@@ -165,4 +165,3 @@ print(f"Sharpe Ratio (rf=3%): {recommended_sr:.3f}")
 joblib.dump(dict(recommended_weights), "models/optimal_weights.pkl")
 print("\n💾 Optimal portfolio weights saved to models/optimal_weights.pkl")
 
-print("\n✅ Task 4 Complete. Proceed to Task 5: Strategy Backtesting.")
