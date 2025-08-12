@@ -173,4 +173,4 @@ This repository is organized to allow other analysts to replicate and extend the
 
 Here is the historical price trend for TSLA, BND, and SPY dashboard
 
-![Price Trend Chart](assets/figures/dashboard.png)
+![GMF Dashboard](assets/figures/dashboard.png)
