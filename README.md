@@ -168,3 +168,9 @@ This repository is organized to allow other analysts to replicate and extend the
 
 * Add new assets to the `/data` directory.
 * Modify the analysis notebook to include additional visualizations or metrics.
+
+## DASHBOARD
+
+Here is the historical price trend for TSLA, BND, and SPY dashboard
+
+![Price Trend Chart](assets/figures/dashboard.png)
